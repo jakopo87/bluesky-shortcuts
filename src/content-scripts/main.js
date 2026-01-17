@@ -359,18 +359,24 @@ class BlueSkyShortcuts {
         const { currentPost } = this.appState.state;
         if (!currentPost) return;
 
-        let like =
-            currentPost.querySelector('[aria-label*="Like ("]') ??
-            currentPost.querySelector('[aria-label*="Unlike ("]')
-        like?.click()
+        const like = currentPost.querySelector('[data-testid=likeBtn]')
+        if (like) {
+            like.click();
+        } else {
+            this.logger.warn("Like button not found");
+        }
     }
 
     replyToPost() {
         const { currentPost } = this.appState.state;
         if (!currentPost) return;
 
-        let reply = currentPost.querySelector('[aria-label*="Reply ("]')
-        reply?.click()
+        const reply = currentPost.querySelector('[data-testid=replyBtn]')
+        if (reply) {
+            reply.click();
+        } else {
+            this.logger.warn("Reply button not found");
+        }
     }
 
     repostPost(event) {
